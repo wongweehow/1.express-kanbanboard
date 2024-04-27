@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <title>My Kanban</title>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <button id="new-task" data-open-modal>Add New Task</button>
+      <p id="date"><%= Date() %></p>
+    </nav>
+    <div class="sub-container">
+
+      <!-- DOING -->
+      <div id="doing" class="basket">
+        <div class="basket-label">Doing</div>
+        <div class="kanban-container">
+
+          <% allTasks.forEach((task) => { %>
+            <% if (task.kanbanStatus === 'doing') { %>
+              <div 
+                data-id="<%= task._id %>"
+                data-title="<%= task.title %>"
+                data-description="<%= task.description %>"
+                data-datestart="<%= task.dateStart %>"
+                data-dateend="<%= task.dateEnd %>"
+                data-kanbanstatus="<%= task.kanbanStatus %>"
+                class="kanban-card"
+              >
+                <p class="title"><%= task.title %></p> 
+                <p class="counter center-txt"><%= task.days %></p>
+              </div>
+            <% } %>
+          <% }) %>
+
+        </div>
+      </div>
+
+      <!-- WAITING -->
+      <div id="waiting" class="basket">
+        <div class="basket-label">Waiting</div>
+        <div class="kanban-container">
+
+          <% allTasks.forEach((task) => { %>
+            <% if (task.kanbanStatus === 'waiting') { %>
+              <div 
+                data-id="<%= task._id %>"
+                data-title="<%= task.title %>"
+                data-description="<%= task.description %>"
+                data-dateStart="<%= task.dateStart %>"
+                data-dateEnd="<%= task.dateEnd %>"
+                data-kanbanStatus="<%= task.kanbanStatus %>"
+                class="kanban-card"
+              >
+                <p class="title"><%= task.title %></p> 
+                <p class="counter center-txt"><%= task.days %></p>
+              </div>
+            <% } %>
+          <% }) %>
+
+        </div>
+      </div>
+
+      <!-- REVIEW -->
+      <div id="review" class="basket">
+        <div class="basket-label">Review</div>
+        <div class="kanban-container">
+
+          <% allTasks.forEach((task) => { %>
+            <% if (task.kanbanStatus === 'review') { %>
+              <div 
+                data-id="<%= task._id %>"
+                data-title="<%= task.title %>"
+                data-description="<%= task.description %>"
+                data-dateStart="<%= task.dateStart %>"
+                data-dateEnd="<%= task.dateEnd %>"
+                data-kanbanStatus="<%= task.kanbanStatus %>"
+                class="kanban-card"
+              >
+                <p class="title"><%= task.title %></p> 
+                <p class="counter center-txt"><%= task.days %></p>
+              </div>
+            <% } %>
+          <% }) %>
+
+        </div>
+      </div>
+
+      <!-- DONE -->
+      <div id="done" class="basket">
+        <div class="basket-label">Done</div>
+        <div class="kanban-container">
+
+          <% allTasks.forEach((task) => { %>
+            <% if (task.kanbanStatus === 'done') { %>
+              <div 
+                data-id="<%= task._id %>"
+                data-title="<%= task.title %>"
+                data-description="<%= task.description %>"
+                data-dateStart="<%= task.dateStart %>"
+                data-dateEnd="<%= task.dateEnd %>"
+                data-kanbanStatus="<%= task.kanbanStatus %>"
+                class="kanban-card"
+              >
+                <p class="title"><%= task.title %></p> 
+                <p class="counter center-txt"><%= task.days %></p>
+              </div>
+            <% } %>
+          <% }) %>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- create / update task modal -->
+    <div data-modal class="modal">
+      <form id="modal-form">
+        <input type="text" id="title" name="title" placeholder="Title" required>
+        <textarea name="description" id="description"></textarea>
+        <div class="form-meta">
+          <label for="kanban-status" class="center-txt">Kanban Status</label>
+          <select name="kanbanStatus" id="kanban-status">
+            <option value="doing">Doing</option>
+            <option value="waiting">Waiting</option>
+            <option value="review">Review</option>
+            <option value="done">Done</option>
+          </select>
+          <label for="date-start" class="center-txt">Start Date:</label>
+          <input type="date" name="dateStart" id="date-start" required>
+          <label for="date-end" class="center-txt">End Date:</label>
+          <input type="date" name="dateEnd" id="date-end" required>
+        </div>
+        <div class="form-nav">
+          <button type="submit">Submit</button>
+          <button data-close-modal>Cancel</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <div data-overlay class="overlay"></div>
+
+  <script src="scripts/modal.js"></script>
+
+</body>
+</html>
